@@ -33,6 +33,7 @@ public class PetStoreTests extends SetupPetStoreTests {
                 .when()
                 .get(EndPoints.PET + EndPoints.STATUS)
                 .then()
+                .assertThat()
                 .statusCode(HttpStatus.SC_OK);
     }
 
@@ -47,6 +48,7 @@ public class PetStoreTests extends SetupPetStoreTests {
                 .when()
                 .get(EndPoints.USER + "/" + user.getUsername())
                 .then()
+                .assertThat()
                 .body(matchesJsonSchema(USER_JSON_SCHEMA));
     }
 
@@ -62,6 +64,7 @@ public class PetStoreTests extends SetupPetStoreTests {
                 .when()
                 .post(EndPoints.STORE + EndPoints.ORDER)
                 .then()
+                .assertThat()
                 .body(matchesJsonSchema(ORDER_JSON_SCHEMA));
     }
 
@@ -85,7 +88,7 @@ public class PetStoreTests extends SetupPetStoreTests {
         int expectedCode = 200;
         int actualCode = apiResponse.getCode();
 
-        assertAll("",
+        assertAll("Should return response data",
                 () -> response
                         .then()
                         .assertThat()
@@ -112,7 +115,7 @@ public class PetStoreTests extends SetupPetStoreTests {
         String expectedMessage = user.getUsername();
         String actualMessage = apiResponse.getMessage();
 
-        assertAll("",
+        assertAll("Should return response data",
                 () -> response
                         .then()
                         .assertThat()
